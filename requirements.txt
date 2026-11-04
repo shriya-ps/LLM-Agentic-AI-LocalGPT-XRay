@@ -1,0 +1,11 @@
+# LocalGPT & LLM X-Ray Requirements (Phase 1 & Phase 2 Stack)
+torch>=2.2.0
+transformers>=4.40.0
+streamlit>=1.33.0
+faiss-cpu>=1.8.0
+sentence-transformers>=2.7.0
+pypdf>=4.2.0
+python-docx>=1.1.0
+plotly>=5.20.0
+numpy>=1.26.0
+scikit-learn>=1.4.0

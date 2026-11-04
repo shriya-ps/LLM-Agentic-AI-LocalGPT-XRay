@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LocalGPT &amp; LLM X-Ray | Unified AI Assistant with RAG</title>
+  <meta name="description" content="Local ChatGPT-style AI assistant with multi-turn conversations, RAG document question answering, streaming text, and integrated 28-layer LLM X-Ray inspection powered by Qwen 2.5-1.5B.">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/document.css">
+  <link rel="stylesheet" href="css/xray.css">
+  <link rel="stylesheet" href="css/chatgpt.css">
+</head>
+<body>
+
+  <!-- Master Top Navigation Bar -->
+  <header class="master-header">
+    <div class="master-brand">
+      <span>🔬</span>
+      <span>LLM &amp; Agentic AI Core</span>
+      <span class="master-badge">LocalGPT + X-Ray Engine</span>
+    </div>
+
+    <!-- Phase Switcher Tabs -->
+    <div class="phase-switcher">
+      <button id="btn-view-chat" class="phase-btn active" title="View Local ChatGPT-style AI Assistant (Phase 2 Target)">
+        <span>💬 LocalGPT (Phase 2)</span>
+      </button>
+      <button id="btn-view-xray" class="phase-btn" title="View Interactive Transformer Pipeline (Phase 1 LLM X-Ray)">
+        <span>🔬 LLM X-Ray (Phase 1)</span>
+      </button>
+      <button id="btn-view-tokens" class="phase-btn" title="View Token Stream and Breakdown">
+        <span>🔤 Token Stream</span>
+      </button>
+      <button id="btn-view-doc" class="phase-btn" title="View Project Specifications (Phase 1 &amp; Phase 2)">
+        <span>📄 Project Specs</span>
+      </button>
+    </div>
+
+    <div class="master-right">
+      <span class="course-tag">
+        <span>🎓</span>
+        <span>Course: LLM &amp; Agentic AI</span>
+      </span>
+      <button id="btn-open-settings" class="top-bar-btn" title="Settings (System Prompt &amp; Model Hyperparameters)" style="color:#94a3b8; font-size:14px; border:1px solid #334155; padding:3px 8px; border-radius:6px;">
+        ⚙️ Settings
+      </button>
+      <span style="color:#94a3b8; font-size:11.5px; border-left: 1px solid #334155; padding-left:10px;">
+        Role: <strong>Student / Developer</strong>
+      </span>
+    </div>
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- VIEW 1: AGENTIC LOCALGPT CHAT PLATFORM (Phase 2 - Primary Interface)      -->
+  <!-- ========================================================================= -->
+  <main id="view-chat" class="view-container active-view">
+    <div class="chat-layout">
+      
+      <!-- Dark Left Sidebar (Photos 2 & 3) -->
+      <aside class="chat-sidebar">
+        <div class="chat-sidebar-header">
+          <div class="chat-brand">
+            <div class="chat-logo-icon">✦</div>
+            <span>LocalGPT</span>
+          </div>
+        </div>
+
+        <!-- Sidebar Actions (+ New Chat, Search) -->
+        <div class="sidebar-actions">
+          <button id="btn-new-chat" class="sidebar-btn" title="Start a fresh conversation (Ctrl+N)">
+            <div class="sidebar-btn-content">
+              <span>+</span>
+              <span>New Chat</span>
+            </div>
+            <span class="sidebar-shortcut">Ctrl+N</span>
+          </button>
+
+          <button id="btn-search-chats" class="sidebar-btn" title="Search through past conversations (Ctrl+K)">
+            <div class="sidebar-btn-content">
+              <span>🔍</span>
+              <span>Search chats</span>
+            </div>
+            <span class="sidebar-shortcut">Ctrl+K</span>
+          </button>
+        </div>
+
+        <!-- Chat History List (Grouped into TODAY, YESTERDAY, PREVIOUS 7 DAYS) -->
+        <div class="chat-history-scroll" id="chat-history-scroll">
+          
+          <!-- TODAY Section -->
+          <div class="history-group" id="group-today">
+            <div class="history-group-title">TODAY</div>
+            <div class="history-item active" data-chat-key="HI">
+              <div class="history-item-left">
+                <span class="history-icon">💬</span>
+                <span class="history-text">HI</span>
+              </div>
+              <div class="history-item-actions">
+                <button class="history-action-btn btn-rename-chat" title="Rename chat">✏️</button>
+                <button class="history-action-btn btn-delete-chat" title="Delete chat">🗑️</button>
+              </div>
+            </div>
+            <div class="history-item" data-chat-key="what is ML">
+              <div class="history-item-left">
+                <span class="history-icon">💬</span>
+                <span class="history-text">what is ML</span>
+              </div>
+              <div class="history-item-actions">
+                <button class="history-action-btn btn-rename-chat" title="Rename chat">✏️</button>
+                <button class="history-action-btn btn-delete-chat" title="Delete chat">🗑️</button>
+              </div>
+            </div>
+            <div class="history-item" data-chat-key="what is aiml">
+              <div class="history-item-left">
+                <span class="history-icon">💬</span>
+                <span class="history-text">what is aiml</span>
+              </div>
+              <div class="history-item-actions">
+                <button class="history-action-btn btn-rename-chat" title="Rename chat">✏️</button>
+                <button class="history-action-btn btn-delete-chat" title="Delete chat">🗑️</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- YESTERDAY Section -->
+          <div class="history-group" id="group-yesterday">
+            <div class="history-group-title">YESTERDAY</div>
+            <div class="history-item" data-chat-key="New Chat">
+              <div class="history-item-left">
+                <span class="history-icon">💬</span>
+                <span class="history-text">New Chat</span>
+              </div>
+              <div class="history-item-actions">
+                <button class="history-action-btn btn-rename-chat" title="Rename chat">✏️</button>
+                <button class="history-action-btn btn-delete-chat" title="Delete chat">🗑️</button>
+              </div>
+            </div>
+            <div class="history-item" data-chat-key="Write an asynchronous ...">
+              <div class="history-item-left">
+                <span class="history-icon">💬</span>
+                <span class="history-text">Write an asynchronous ...</span>
+              </div>
+              <div class="history-item-actions">
+                <button class="history-action-btn btn-rename-chat" title="Rename chat">✏️</button>
+                <button class="history-action-btn btn-delete-chat" title="Delete chat">🗑️</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- User Profile in bottom left -->
+        <div class="chat-user-footer">
+          <div class="chat-user-left">
+            <div class="chat-user-avatar">S</div>
+            <div class="chat-user-info">
+              <div class="chat-user-name">Student / Developer</div>
+              <div class="chat-user-plan">Local Agentic Workspace</div>
+            </div>
+          </div>
+          <button id="btn-sidebar-settings" class="top-bar-btn" title="Open Settings" style="font-size:14px;">⚙️</button>
+        </div>
+      </aside>
+
+      <!-- Main Chat Area -->
+      <section class="chat-main">
+        
+        <!-- Top Navigation Bar (Photo 3) -->
+        <div class="chat-top-bar">
+          <div class="model-selector-pill" id="pill-model-selector" title="Switch transformer model and precision">
+            <span>Qwen 2.5 1.5B — Local (No API Key Required)</span>
+            <span class="badge-local">Local</span>
+            <span style="font-size:10px; opacity:0.6;">▼</span>
+          </div>
+
+          <div class="top-bar-right">
+            <span id="chat-current-title" class="chat-current-title">HI</span>
+            <button id="btn-chat-xray-jump" class="action-btn-pill highlight-xray" title="Open full transformer inspection on current chat">
+              <span>🔬</span>
+              <span>Open LLM X-Ray</span>
+            </button>
+            <button id="btn-chat-settings-trigger" class="top-bar-btn" title="Model &amp; System Settings">⚙️</button>
+          </div>
+        </div>
+
+        <!-- Floating Stop Generating Button (Active during streaming) -->
+        <div id="stop-generating-wrap" class="stop-generating-wrap" style="display:none;">
+          <button id="btn-stop-generating" class="btn-stop-generating">
+            <span>⏹</span>
+            <span>Stop Generating</span>
+          </button>
+        </div>
+
+        <!-- Chat Messages Stream (Photos 3, 4, 5) -->
+        <div id="chat-messages-list" class="chat-messages-container">
+          <!-- Messages will be rendered dynamically with user edit, markdown, copy, regenerate, and X-Ray links -->
+        </div>
+
+        <!-- Floating Chat Input Bar at Bottom (Photo 3 & Photo 4) -->
+        <div class="chat-input-wrapper">
+          <div class="chat-input-card">
+            
+            <div class="input-left-controls">
+              <!-- Upload Attachment Button -->
+              <button id="btn-attach" class="btn-input-tool" title="Upload documents (PDF, DOCX, TXT, CSV, JSON) for RAG QA">
+                📎
+              </button>
+
+              <!-- Indexed Documents Badge (Photo 3) -->
+              <div id="docs-badge" class="docs-badge" title="Click to view and manage uploaded RAG documents">
+                <span>📄</span>
+                <span>Docs (<span id="docs-count">2</span>)</span>
+              </div>
+
+              <!-- RAG ON / OFF Toggle Pill (Photo 3) -->
+              <div id="rag-toggle-pill" class="rag-toggle-pill" title="Toggle Agentic Retrieval-Augmented Generation">
+                <span>✨</span>
+                <span id="rag-status-text">RAG ON</span>
+              </div>
+            </div>
+
+            <!-- Text Input -->
+            <textarea id="chat-input" class="chat-textarea" placeholder="Message LocalGPT... (Upload PDF, DOCX, TXT, CSV, JSON for RAG QA)" rows="1"></textarea>
+
+            <!-- Send Button -->
+            <button id="btn-send-chat" class="btn-send-message" title="Send message (Enter)">
+              ⬆️
+            </button>
+          </div>
+
+          <div class="input-disclaimer">
+            Local Qwen 2.5-1.5B Engine with Multi-Turn Memory &amp; Vector RAG. Click <strong>"🔬 LLM X-Ray"</strong> on any message to inspect internal inference mechanics.
+          </div>
+        </div>
+
+      </section>
+    </div>
+  </main>
+
+
+  <!-- ========================================================================= -->
+  <!-- VIEW 2: LLM X-RAY INTERACTIVE DASHBOARD (Phase 1 Advanced Inspection)     -->
+  <!-- ========================================================================= -->
+  <main id="view-xray" class="view-container">
+    <div class="xray-layout">
+      
+      <!-- Left Sidebar: Controls & Hyperparameters (Laptop Photo) -->
+      <aside class="xray-sidebar">
+        <div class="xray-sidebar-section">
+          <div class="xray-section-title">
+            <span>⚙️</span>
+            <span>Model &amp; Inference Controls</span>
+            <span class="tooltip-icon" title="Select transformer model architecture and precision">?</span>
+          </div>
+
+          <div class="xray-control-group">
+            <div class="xray-control-header">
+              <span>Select Model</span>
+              <span class="tooltip-icon" title="Local open-weights Qwen 2.5 instruction model">?</span>
+            </div>
+            <select id="select-model" class="xray-select">
+              <option value="qwen-1.5b" selected>Qwen 2.5 - 1.5B (Instruct - Project Target)</option>
+              <option value="qwen-0.5b">Qwen 2.5 - 0.5B (Ultra-Fast)</option>
+              <option value="llama-3.2-1b">Llama 3.2 - 1B (Lightweight)</option>
+            </select>
+          </div>
+
+          <div class="xray-control-group">
+            <div class="xray-control-header">
+              <span>Precision / Dtype</span>
+              <span class="tooltip-icon" title="Hardware floating point format">?</span>
+            </div>
+            <select id="select-dtype" class="xray-select">
+              <option value="bfloat16" selected>bfloat16</option>
+              <option value="float16">float16</option>
+              <option value="float32">float32</option>
+              <option value="int8">int8 (Quantized)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Generation Hyperparameters (Laptop Photo) -->
+        <div class="xray-sidebar-section">
+          <div class="xray-section-title">
+            <span>🎛️</span>
+            <span>Generation Hyperparameters</span>
+          </div>
+
+          <!-- Temperature -->
+          <div class="xray-control-group">
+            <div class="xray-control-header">
+              <span>Temperature</span>
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span id="val-temperature" class="xray-slider-value">0.75</span>
+                <span class="tooltip-icon" title="Scales logit sharpness. Lower = deterministic, higher = creative">?</span>
+              </div>
+            </div>
+            <input type="range" id="slider-temperature" class="xray-slider" min="0.0" max="2.0" step="0.05" value="0.75" data-param="temperature">
+          </div>
+
+          <!-- Top-K -->
+          <div class="xray-control-group">
+            <div class="xray-control-header">
+              <span>Top-K</span>
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span id="val-topk" class="xray-slider-value">50</span>
+                <span class="tooltip-icon" title="Truncates vocabulary candidate pool to top K tokens">?</span>
+              </div>
+            </div>
+            <input type="range" id="slider-topk" class="xray-slider" min="1" max="100" step="1" value="50" data-param="topK">
+          </div>
+
+          <!-- Top-P (Nucleus) -->
+          <div class="xray-control-group">
+            <div class="xray-control-header">
+              <span>Top-P (Nucleus)</span>
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span id="val-topp" class="xray-slider-value">0.90</span>
+                <span class="tooltip-icon" title="Cumulative probability mass threshold for nucleus sampling">?</span>
+              </div>
+            </div>
+            <input type="range" id="slider-topp" class="xray-slider" min="0.0" max="1.0" step="0.01" value="0.90" data-param="topP">
+          </div>
+
+          <!-- Max New Tokens -->
+          <div class="xray-control-group">
+            <div class="xray-control-header">
+              <span>Max New Tokens</span>
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span id="val-maxtokens" class="xray-slider-value">30</span>
+                <span class="tooltip-icon" title="Maximum tokens generated in a single autoregressive pass">?</span>
+              </div>
+            </div>
+            <input type="range" id="slider-maxtokens" class="xray-slider" min="5" max="128" step="1" value="30" data-param="maxNewTokens">
+          </div>
+        </div>
+
+        <div style="margin-top:auto; font-size:11px; color:#94a3b8; border-top:1px solid #e2e8f0; padding-top:12px;">
+          <span>Internal Architecture:</span><br>
+          <strong id="sidebar-arch-summary">28 Layers • 12 Heads • 1536 Dim • RoPE • RMSNorm</strong>
+        </div>
+      </aside>
+
+      <!-- Main Area: Banner, Pipeline Tabs, and Interactive Stages -->
+      <section class="xray-main">
+        
+        <!-- Dark Card Banner with Return Button -->
+        <div class="xray-banner" style="display:flex; justify-content:space-between; align-items:center; flex-direction:row; flex-wrap:wrap; gap:12px;">
+          <div>
+            <div class="xray-banner-title">
+              <span>🔬</span>
+              <span>LLM X-RAY</span>
+            </div>
+            <div class="xray-banner-subtitle">
+              Advanced Inspection Mode &amp; Transformer Internal Activations
+            </div>
+          </div>
+          <button id="btn-back-to-chat" class="btn-launch-interactive" style="background:#10a37f; box-shadow:none;">
+            <span>💬</span>
+            <span>Return to LocalGPT Chat</span>
+          </button>
+        </div>
+
+        <!-- 9 Pipeline Step Buttons Tabs (Laptop Photo) -->
+        <nav class="xray-pipeline-nav">
+          <button class="pipeline-tab active-tab" data-target="tab-prompt">1. Input Prompt</button>
+          <button class="pipeline-tab" data-target="tab-tokenizer">2. Tokenizer</button>
+          <button class="pipeline-tab" data-target="tab-tokenids">3. Token IDs</button>
+          <button class="pipeline-tab" data-target="tab-embeddings">4. Embeddings</button>
+          <button class="pipeline-tab" data-target="tab-layers">5. 28 Layers</button>
+          <button class="pipeline-tab" data-target="tab-attention">6. Multi-Head Attention</button>
+          <button class="pipeline-tab" data-target="tab-hiddenstates">7. Hidden States</button>
+          <button class="pipeline-tab" data-target="tab-logits">8. Logits &amp; Softmax</button>
+          <button class="pipeline-tab" data-target="tab-generation">9. Generation</button>
+        </nav>
+
+        <!-- Prompt Input & Controls Card (Step 3 Wireframe & Laptop Photo) -->
+        <div class="xray-input-card">
+          <div class="input-row">
+            <div class="input-flex-grow">
+              <label class="xray-label" for="input-prompt">Enter your prompt to X-Ray the LLM.</label>
+              <input type="text" id="input-prompt" class="xray-input-text" value="Explain Machine Learning" placeholder="Type prompt here...">
+            </div>
+
+            <div class="preset-dropdown-container">
+              <label class="xray-label" for="select-preset">💡 Preset Prompts</label>
+              <select id="select-preset" class="xray-select">
+                <option value="Explain Machine Learning" selected>Explain Machine Learning</option>
+                <option value="What is AI?">What is AI?</option>
+                <option value="WHAT IS PYTHON">WHAT IS PYTHON</option>
+                <option value="What are its types?">What are its types?</option>
+                <option value="The capital of France is">The capital of France is</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <button id="btn-run-xray" class="btn-run-xray">
+              <span>🚀</span>
+              <span>Run LLM X-Ray</span>
+            </button>
+            <span style="font-size:12px; color:#64748b;">Target Model: <strong>Qwen/Qwen2.5-1.5B-Instruct</strong> (1536 dim, 28 layers)</span>
+          </div>
+        </div>
+
+        <!-- Status / Progress Box -->
+        <div id="xray-status" class="xray-status-box">
+          <span style="color:#0ea5e9;">💡</span>
+          <div>Enter a prompt above or click <strong>🔬 LLM X-Ray</strong> on any message in LocalGPT to inspect activations!</div>
+        </div>
+
+        <!-- PIPELINE PANELS (9 INTERACTIVE STAGES) -->
+
+        <!-- TAB 1: Input Prompt & ChatML -->
+        <div id="tab-prompt" class="pipeline-content-panel active-panel">
+          <div class="interactive-viz-box">
+            <div class="viz-header">
+              <h3 class="viz-title">Stage 1: Prompt Ingestion &amp; ChatML Protocol</h3>
+              <span class="master-badge">Qwen 2.5 ChatML</span>
+            </div>
+            <p style="font-size:13.5px; color:#475569;">
+              Modern instruction-tuned LLMs like <strong>Qwen 2.5-1.5B</strong> wrap user prompts inside structured delimiters.
+              This prevents prompt injection and delineates system instructions from user inputs:
+            </p>
+            <div style="background:#0f172a; color:#e2e8f0; padding:16px; border-radius:8px; font-family:var(--font-mono); font-size:12.5px; line-height:1.7;">
+              <span style="color:#c084fc;">&lt;|im_start|&gt;</span>system<br>
+              <span id="display-system-prompt">You are a helpful assistant. Provide concise, complete, and direct answers.</span><span style="color:#c084fc;">&lt;|im_end|&gt;</span><br>
+              <span style="color:#c084fc;">&lt;|im_start|&gt;</span>user<br>
+              <span id="display-prompt-text" style="color:#38bdf8; font-weight:700;">Explain Machine Learning</span><span style="color:#c084fc;">&lt;|im_end|&gt;</span><br>
+              <span style="color:#c084fc;">&lt;|im_start|&gt;</span>assistant<br>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: Tokenizer (Photo 2 & Photo 3) -->
+        <div id="tab-tokenizer" class="pipeline-content-panel">
+          <div class="token-section-header">
+            How raw character strings are chopped into discrete tokens and mapped to vocabulary integer IDs.
+          </div>
+
+          <div class="token-stream-container">
+            <div class="token-stream-title">
+              <span>Token Stream (Pill Representation):</span>
+              <span style="font-size:12px; font-weight:400; color:#94a3b8;">ChatML Colored Pills (Click to inspect)</span>
+            </div>
+
+            <!-- Dynamically populated pills -->
+            <div id="token-pills-flow" class="token-pills-flow token-pills-wrap"></div>
+
+            <!-- Custom Token Addition Controls -->
+            <div class="token-add-bar">
+              <input type="text" id="input-add-token" class="token-add-input" placeholder="Add custom token (e.g. &lt;|thought|&gt; or word)...">
+              <button id="btn-add-token" class="token-add-btn">+ Add Token</button>
+              <button id="btn-clear-tokens" class="token-add-btn" style="background:#475569;">Reset Custom</button>
+            </div>
+          </div>
+
+          <!-- Detailed Token Table & Compression Metrics (Photo 2) -->
+          <div class="token-details-grid">
+            <div class="token-table-card">
+              <div class="token-table-title">Detailed Token Records:</div>
+              <div class="token-table-scroll">
+                <table class="token-table">
+                  <thead>
+                    <tr>
+                      <th>Index</th>
+                      <th>Token String</th>
+                      <th>Token ID</th>
+                      <th>Length</th>
+                      <th>Special</th>
+                      <th>UTF-8 Bytes</th>
+                    </tr>
+                  </thead>
+                  <tbody id="token-table-body"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="metrics-column">
+              <div class="token-table-title">Lexical Compression Metrics:</div>
+              <div class="metric-card">
+                <span class="metric-label">Total Characters</span>
+                <span id="metric-chars" class="metric-value">0</span>
+                <span class="metric-sub">Raw prompt string length</span>
+              </div>
+              <div class="metric-card">
+                <span class="metric-label">Total Tokens</span>
+                <span id="metric-tokens" class="metric-value">0</span>
+                <span class="metric-sub">Discrete vocabulary units</span>
+              </div>
+              <div class="metric-card">
+                <span class="metric-label">Compression Ratio</span>
+                <span id="metric-ratio" class="metric-value">0 chars/token</span>
+                <span class="metric-sub">High BPE vocabulary density</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: Token IDs -->
+        <div id="tab-tokenids" class="pipeline-content-panel">
+          <div class="interactive-viz-box">
+            <div class="viz-header">
+              <h3 class="viz-title">Stage 3: Discrete Integer Vocabulary Lookup</h3>
+              <span class="master-badge">Vocab Size: 151,936</span>
+            </div>
+            <p style="font-size:13.5px; color:#475569;">
+              Each token string maps bijectively to a 32-bit integer in the Qwen 2.5 vocabulary matrix (<code>vocab_size = 151,936</code>). Special control tokens reside in reserved ranges (&gt;151643).
+            </p>
+            <div id="tokenids-matrix" style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:16px;"></div>
+          </div>
+        </div>
+
+        <!-- TAB 4: Embeddings & RoPE -->
+        <div id="tab-embeddings" class="pipeline-content-panel">
+          <div class="interactive-viz-box">
+            <div class="viz-header">
+              <h3 class="viz-title">Stage 4: Token Embeddings &amp; 2D PCA Space</h3>
+              <span class="master-badge">d_model = 1536</span>
+            </div>
+            <p style="font-size:13px; color:#475569; margin-bottom:14px;">
+              Tokens are mapped to dense <strong>1536-dimensional</strong> vectors from the embedding table, rotated with <strong>Rotary Position Embeddings (RoPE)</strong>.
+            </p>
+            <div id="embeddings-viz-container"></div>
+          </div>
+        </div>
+
+        <!-- TAB 5: 28 Layers -->
+        <div id="tab-layers" class="pipeline-content-panel">
+          <div class="interactive-viz-box">
+            <div class="viz-header">
+              <h3 class="viz-title">Stage 5: 28 Transformer Decoder Layers Progression</h3>
+              <span class="master-badge">28 Blocks • RMSNorm • SwiGLU</span>
+            </div>
+            <div id="layers-viz-container"></div>
+          </div>
+        </div>
+
+        <!-- TAB 6: Multi-Head Attention -->
+        <div id="tab-attention" class="pipeline-content-panel">
+          <div class="interactive-viz-box">
+            <div class="viz-header">
+              <h3 class="viz-title">Stage 6: Causal Multi-Head Self-Attention Heatmap</h3>
+              <span class="master-badge">12 Query Heads (2 KV)</span>
+            </div>
+            <div id="attention-heatmap-container"></div>
+          </div>
+        </div>
+
+        <!-- TAB 7: Hidden States -->
+        <div id="tab-hiddenstates" class="pipeline-content-panel">
+          <div class="interactive-viz-box">
+            <div class="viz-header">
+              <h3 class="viz-title">Stage 7: Hidden States across Layers (1, 10, 20, 28)</h3>
+              <span class="master-badge">Residual Stream Geometry</span>
+            </div>
+            <div id="hidden-states-container"></div>
+          </div>
+        </div>
+
+        <!-- TAB 8: Logits & Softmax -->
+        <div id="tab-logits" class="pipeline-content-panel">
+          <div class="interactive-viz-box">
+            <div class="viz-header">
+              <h3 class="viz-title">Stage 8: Unembedding, Logits, &amp; Softmax Probabilities</h3>
+              <span class="master-badge">Step 9 Probability Bar Chart</span>
+            </div>
+            <div id="logits-container"></div>
+          </div>
+        </div>
+
+        <!-- TAB 9: Generation -->
+        <div id="tab-generation" class="pipeline-content-panel">
+          <div class="interactive-viz-box">
+            <div class="viz-header">
+              <h3 class="viz-title">Stage 9: Step-by-Step Next-Token Rollout &amp; Final Response</h3>
+              <span class="master-badge">Step 10 Progressive Rollout</span>
+            </div>
+            <div id="generation-container"></div>
+          </div>
+        </div>
+
+      </section>
+    </div>
+  </main>
+
+
+  <!-- ========================================================================= -->
+  <!-- VIEW 3: PROJECT SPECIFICATION SHEET (Photos 1 to 5 - Phase 1 & Phase 2)   -->
+  <!-- ========================================================================= -->
+  <main id="view-doc" class="view-container">
+    <div class="doc-view-container">
+      
+      <!-- Top Action & Pagination Bar with Phase 1 vs Phase 2 Toggle -->
+      <div class="doc-top-bar">
+        <div class="doc-top-title">
+          <span>📋</span>
+          <span id="doc-active-spec-title">Project Specification Sheet (Phase 2 — LocalGPT)</span>
+        </div>
+
+        <!-- Specification Phase Toggle -->
+        <div class="doc-phase-selector">
+          <button id="btn-spec-phase-2" class="doc-phase-tab active">Phase 2: LocalGPT</button>
+          <button id="btn-spec-phase-1" class="doc-phase-tab">Phase 1: LLM X-Ray</button>
+        </div>
+
+        <!-- 5 Page Navigation Buttons -->
+        <div class="doc-pagination">
+          <button id="btn-doc-prev" class="doc-page-btn" title="Previous Page">◀</button>
+          <button id="btn-doc-page-1" class="doc-page-btn active" data-page="1">Page 1</button>
+          <button id="btn-doc-page-2" class="doc-page-btn" data-page="2">Page 2</button>
+          <button id="btn-doc-page-3" class="doc-page-btn" data-page="3">Page 3</button>
+          <button id="btn-doc-page-4" class="doc-page-btn" data-page="4">Page 4</button>
+          <button id="btn-doc-page-5" class="doc-page-btn" data-page="5">Page 5</button>
+          <button id="btn-doc-next" class="doc-page-btn" title="Next Page">▶</button>
+        </div>
+
+        <button id="btn-doc-launch-chat" class="btn-launch-interactive" style="background:#10a37f;">
+          <span>💬</span>
+          <span>Launch LocalGPT</span>
+        </button>
+      </div>
+
+      <!-- ================================================================= -->
+      <!-- PHASE 2 SPECIFICATIONS (Photos 1 to 5 from User Upload)           -->
+      <!-- ================================================================= -->
+      <div id="spec-phase-2-container">
+        
+        <!-- P2 - Page 1: Exact Replication of Photo 1 -->
+        <article id="doc-p2-sheet-1" class="doc-sheet active-doc-sheet">
+          <header class="doc-header-row">
+            <svg class="doc-logo-svg" viewBox="0 0 100 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="p2GradLeft" x1="0%" y1="100%" x2="50%" y2="0%">
+                  <stop offset="0%" stop-color="#06b6d4" />
+                  <stop offset="100%" stop-color="#0284c7" />
+                </linearGradient>
+                <linearGradient id="p2GradRight" x1="50%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#0284c7" />
+                  <stop offset="100%" stop-color="#1e3a8a" />
+                </linearGradient>
+                <linearGradient id="p2GradBar" x1="0%" y1="50%" x2="100%" y2="50%">
+                  <stop offset="0%" stop-color="#38bdf8" />
+                  <stop offset="100%" stop-color="#1d4ed8" />
+                </linearGradient>
+              </defs>
+              <path d="M48 6 L10 98 L30 98 L55 35 Z" fill="url(#p2GradLeft)" />
+              <path d="M52 6 L90 98 L70 98 L45 35 Z" fill="url(#p2GradRight)" />
+              <polygon points="26,68 74,68 68,56 32,56" fill="url(#p2GradBar)" />
+            </svg>
+
+            <div class="doc-header-text">
+              <h1 class="doc-main-title">PROJECT PHASE 2 - LocalGPT</h1>
+              <div class="doc-sub-title">ChatGPT-Style Local AI Assistant with RAG and LLM X-Ray</div>
+            </div>
+          </header>
+
+          <section class="doc-section">
+            <h2 class="doc-section-heading">1. Project Overview</h2>
+            <p class="doc-paragraph">
+              Build a <strong>local ChatGPT-style AI application</strong> that allows users to have continuous conversations with an LLM, upload documents, ask questions about those documents, maintain conversation history, and inspect the internal LLM inference process.
+            </p>
+            <p class="doc-paragraph">
+              The application will use the same local Hugging Face LLM from Project 1, so <strong>no external LLM API is required</strong>.
+            </p>
+
+            <div class="doc-sub-heading">Core Flow</div>
+            <div class="doc-flow-box" style="font-family:var(--font-mono); font-size:12px; line-height:1.7;">
+              User<br>
+              &darr;<br>
+              Chat Interface<br>
+              &darr;<br>
+              Conversation Memory<br>
+              &darr;<br>
+              Context Manager<br>
+              &darr;<br>
+              Document Retrieval (if required)<br>
+              &darr;<br>
+              Qwen LLM<br>
+              &darr;<br>
+              Streaming Response<br>
+              &darr;<br>
+              ChatGPT-style Answer
+            </div>
+
+            <div class="doc-sub-heading">Optional:</div>
+            <div class="doc-flow-box" style="font-family:var(--font-mono); font-size:12px; line-height:1.7;">
+              Response<br>
+              &darr;<br>
+              LLM X-Ray<br>
+              &darr;<br>
+              Tokens &rarr; Embeddings &rarr; Layers &rarr; Attention &rarr; Hidden States &rarr; Logits &rarr; Probabilities
+            </div>
+
+            <p class="doc-paragraph" style="margin-top:14px; font-weight:600; color:#1e3a8a;">
+              The X-Ray functionality from Project 1 becomes an <strong>advanced inspection mode</strong> rather than the main interface.
+            </p>
+          </section>
+
+          <div style="display:flex; justify-content:space-between; margin-top:30px;">
+            <div></div>
+            <button class="doc-page-btn" style="background:#2563eb; color:#ffffff;" onclick="switchDocPage(2)">Page 2 (Objectives &amp; Model) &rarr;</button>
+          </div>
+        </article>
+
+        <!-- P2 - Page 2: Exact Replication of Photo 2 -->
+        <article id="doc-p2-sheet-2" class="doc-sheet" style="display:none;">
+          <h2 class="doc-section-heading" style="font-size:20px;">2. Main Objective</h2>
+          <p class="doc-paragraph">
+            The goal is to upgrade the existing <strong>LLM X-Ray</strong> into a practical <strong>local AI assistant similar to ChatGPT</strong>.
+          </p>
+
+          <p class="doc-paragraph" style="margin-bottom:6px; font-weight:700;">The system should support:</p>
+          <ul class="doc-list">
+            <li>Multi-turn conversations</li>
+            <li>Conversation history</li>
+            <li>Context-aware responses</li>
+            <li>Streaming text generation</li>
+            <li>Regenerate response</li>
+            <li>Edit user messages</li>
+            <li>Copy responses</li>
+            <li>Markdown rendering</li>
+            <li>Code formatting</li>
+            <li>System prompt</li>
+            <li>Temperature / Top-K / Top-P controls</li>
+            <li>Document upload</li>
+            <li>Question answering from documents</li>
+            <li>Conversation-based memory</li>
+            <li>LLM X-Ray inspection</li>
+          </ul>
+
+          <p class="doc-paragraph" style="margin-top:10px;">
+            The application should still run locally on a personal laptop.
+          </p>
+
+          <section class="doc-section" style="margin-top:24px;">
+            <h2 class="doc-section-heading">3. Model</h2>
+            <div style="margin-bottom:6px; font-weight:700;">Use the existing model:</div>
+            <div style="font-size:14px; font-weight:700; color:#1e3a8a; margin-bottom:8px;">Qwen/Qwen2.5-1.5B-Instruct</div>
+            <p class="doc-paragraph">
+              This keeps Project 2 compatible with Project 1 and avoids requiring an external API. Project 1 already specifies this model as a locally runnable, instruction-tuned Hugging Face model.
+            </p>
+            <p class="doc-paragraph" style="margin-bottom:4px;">Use:</p>
+            <div class="doc-code-box">
+AutoTokenizer<br>
+AutoModelForCausalLM
+            </div>
+            <p class="doc-paragraph">from Hugging Face Transformers, as in Project 1.</p>
+          </section>
+
+          <div style="display:flex; justify-content:space-between; margin-top:30px;">
+            <button class="doc-page-btn" style="background:#e2e8f0; color:#1e293b;" onclick="switchDocPage(1)">&larr; Page 1</button>
+            <button class="doc-page-btn" style="background:#2563eb; color:#ffffff;" onclick="switchDocPage(3)">Page 3 (Stack &amp; Tree) &rarr;</button>
+          </div>
+        </article>
+
+        <!-- P2 - Page 3: Exact Replication of Photo 3 -->
+        <article id="doc-p2-sheet-3" class="doc-sheet" style="display:none;">
+          <h2 class="doc-section-heading">4. Technology Stack</h2>
+          <div class="doc-code-box" style="margin-bottom:14px; font-size:12px;">
+Python<br>
+PyTorch<br>
+Hugging Face Transformers<br>
+Streamlit<br>
+FAISS<br>
+Sentence Transformers<br>
+PyPDF<br>
+python-docx<br>
+Plotly<br>
+NumPy
+          </div>
+
+          <div class="doc-sub-heading">New technologies compared with Project 1:</div>
+          <table class="token-table" style="margin-top:8px; margin-bottom:16px;">
+            <thead>
+              <tr>
+                <th style="width:40%;">Technology</th>
+                <th>Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>FAISS</strong></td><td>Vector database / similarity search</td></tr>
+              <tr><td><strong>Sentence Transformers</strong></td><td>Document embeddings</td></tr>
+              <tr><td><strong>PyPDF</strong></td><td>Read PDF documents</td></tr>
+              <tr><td><strong>python-docx</strong></td><td>Read Word documents</td></tr>
+              <tr><td><strong>Streamlit</strong></td><td>ChatGPT-style UI</td></tr>
+              <tr><td><strong>Plotly</strong></td><td>Visualization</td></tr>
+              <tr><td><strong>Transformers</strong></td><td>Local LLM</td></tr>
+            </tbody>
+          </table>
+
+          <section class="doc-section">
+            <h2 class="doc-section-heading">5. Project Structure</h2>
+            <div class="doc-code-box" style="font-family:var(--font-mono); font-size:12px; line-height:1.5;">
+LocalGPT/<br>
+├── app.py<br>
+├── model.py<br>
+├── tokenizer.py<br>
+├── chat.py<br>
+├── memory.py<br>
+├── document_loader.py<br>
+├── embeddings.py<br>
+├── vector_store.py<br>
+├── rag.py<br>
+├── xray.py<br>
+├── visualization.py<br>
+├── database.py<br>
+├── requirements.txt<br>
+└── data/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── documents/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;└── conversations/
+            </div>
+          </section>
+
+          <div style="display:flex; justify-content:space-between; margin-top:30px;">
+            <button class="doc-page-btn" style="background:#e2e8f0; color:#1e293b;" onclick="switchDocPage(2)">&larr; Page 2</button>
+            <button class="doc-page-btn" style="background:#2563eb; color:#ffffff;" onclick="switchDocPage(4)">Page 4 (Steps 1–2) &rarr;</button>
+          </div>
+        </article>
+
+        <!-- P2 - Page 4: Exact Replication of Photo 4 -->
+        <article id="doc-p2-sheet-4" class="doc-sheet" style="display:none;">
+          <h2 class="doc-section-heading">6. Implementation Steps</h2>
+
+          <div class="doc-section" style="margin-top:10px;">
+            <h3 style="font-size:16px; font-weight:700; color:#1e3a8a; margin-bottom:6px;">Step 1 &mdash; Reuse Project 1</h3>
+            <p class="doc-paragraph">Take the existing LLM loading and generation code.</p>
+            <p class="doc-paragraph" style="margin-bottom:4px;">The existing project already has:</p>
+            <div class="doc-code-box">
+app.py<br>
+model.py<br>
+tokenizer.py<br>
+visualization.py
+            </div>
+            <p class="doc-paragraph" style="margin-bottom:4px;">and uses:</p>
+            <div class="doc-code-box">
+PyTorch<br>
+Transformers<br>
+Streamlit<br>
+Plotly<br>
+Scikit-learn<br>
+NumPy
+            </div>
+            <p class="doc-paragraph">as its base stack. <strong>Do not rebuild the model from scratch.</strong></p>
+          </div>
+
+          <div class="doc-section" style="margin-top:20px;">
+            <h3 style="font-size:16px; font-weight:700; color:#1e3a8a; margin-bottom:6px;">Step 2 &mdash; Build ChatGPT Interface</h3>
+            <p class="doc-paragraph">Replace the simple single-prompt interface with a conversation interface.</p>
+            <p class="doc-paragraph" style="margin-bottom:4px;">Example:</p>
+
+            <div class="doc-wireframe-box" style="max-width:440px;">
+              <div class="doc-wireframe-title">LOCALGPT</div>
+              <table style="width:100%; border-collapse:collapse; font-size:11.5px;">
+                <tr>
+                  <td style="width:30%; border-right:1px solid #94a3b8; vertical-align:top; padding:4px;">
+                    <div>New Chat</div><br>
+                    <div>Chat 1</div>
+                    <div>Chat 2</div>
+                    <div>Chat 3</div><br>
+                    <div>+ New Chat</div>
+                  </td>
+                  <td style="padding:6px; vertical-align:top;">
+                    <div><strong>User:</strong> Explain AI</div>
+                    <div style="margin:4px 0;"><strong>AI:</strong> Artificial Intelligence</div>
+                    <div><strong>User:</strong> Give an example</div>
+                    <div><strong>AI:</strong> For example...</div>
+                  </td>
+                </tr>
+                <tr style="border-top:1px solid #94a3b8;">
+                  <td style="padding:4px; font-size:11px;">Upload File</td>
+                  <td style="padding:4px; font-size:11px; text-align:right;">Ask anything... [▶]</td>
+                </tr>
+              </table>
+            </div>
+
+            <p class="doc-paragraph" style="margin-top:10px;">
+              The interface should behave like a normal AI assistant rather than the Project 1 visualization-first interface.
+            </p>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; margin-top:30px;">
+            <button class="doc-page-btn" style="background:#e2e8f0; color:#1e293b;" onclick="switchDocPage(3)">&larr; Page 3</button>
+            <button class="doc-page-btn" style="background:#2563eb; color:#ffffff;" onclick="switchDocPage(5)">Page 5 (Multi-Turn) &rarr;</button>
+          </div>
+        </article>
+
+        <!-- P2 - Page 5: Exact Replication of Photo 5 -->
+        <article id="doc-p2-sheet-5" class="doc-sheet" style="display:none;">
+          <h2 class="doc-section-heading">Step 3 &mdash; Implement Multi-Turn Conversation</h2>
+          <p class="doc-paragraph">Project 1 generates a response from a single prompt.</p>
+          <p class="doc-paragraph" style="margin-bottom:4px;">Project 2 should maintain:</p>
+
+          <div class="doc-code-box" style="line-height:1.7;">
+User:<br>
+What is Machine Learning?<br><br>
+AI:<br>
+Machine Learning is...<br><br>
+User:<br>
+What are its types?<br><br>
+AI:<br>
+The main types are...<br><br>
+User:<br>
+Give me an example.<br><br>
+AI:<br>
+For example...
+          </div>
+
+          <p class="doc-paragraph">
+            The previous messages are included as context when generating the next response.
+          </p>
+
+          <div class="doc-sub-heading">Basic structure:</div>
+          <div class="doc-code-box" style="text-align:center; line-height:1.8;">
+Conversation<br>
+&darr;<br>
+Message History<br>
+&darr;<br>
+Context Builder<br>
+&darr;<br>
+LLM<br>
+&darr;<br>
+Response<br>
+&darr;<br>
+Save Response
+          </div>
+
+          <div style="display:flex; justify-content:space-between; margin-top:30px;">
+            <button class="doc-page-btn" style="background:#e2e8f0; color:#1e293b;" onclick="switchDocPage(4)">&larr; Page 4</button>
+            <button id="btn-doc-p2-launch" class="btn-launch-interactive" style="background:#10a37f;">
+              <span>💬</span>
+              <span>Launch LocalGPT Multi-Turn Engine</span>
+            </button>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- ================================================================= -->
+      <!-- PHASE 1 SPECIFICATIONS (Preserved Exact 5 Sheets from Project 1)  -->
+      <!-- ================================================================= -->
+      <div id="spec-phase-1-container" style="display:none;">
+        
+        <!-- P1 - Sheet 1 -->
+        <article id="doc-sheet-1" class="doc-sheet active-doc-sheet">
+          <header class="doc-header-row">
+            <svg class="doc-logo-svg" viewBox="0 0 100 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M48 6 L10 98 L30 98 L55 35 Z" fill="#0284c7" />
+              <path d="M52 6 L90 98 L70 98 L45 35 Z" fill="#1e3a8a" />
+              <polygon points="26,68 74,68 68,56 32,56" fill="#38bdf8" />
+            </svg>
+            <div class="doc-header-text">
+              <h1 class="doc-main-title">PROJECT PHASE 1 - LLM X-RAY</h1>
+              <div class="doc-sub-title">Interactive Visualization of LLM Inference</div>
+            </div>
+          </header>
+
+          <section class="doc-section">
+            <h2 class="doc-section-heading">1. Project Overview</h2>
+            <p class="doc-paragraph">
+              Build a local LLM application that accepts a text prompt, generates a response using a Hugging Face model, and visually shows what happens inside the model during inference.
+            </p>
+            <div class="doc-sub-heading">Core Flow</div>
+            <div class="doc-flow-box">
+              <span class="doc-flow-step" data-target-tab="tab-prompt">Input</span> &rarr;
+              <span class="doc-flow-step" data-target-tab="tab-tokenizer">Tokenization</span> &rarr;
+              <span class="doc-flow-step" data-target-tab="tab-tokenids">Token IDs</span> &rarr;
+              <span class="doc-flow-step" data-target-tab="tab-embeddings">Embeddings</span> &rarr;
+              <span class="doc-flow-step" data-target-tab="tab-layers">Transformer Layers</span> &rarr;
+              <span class="doc-flow-step" data-target-tab="tab-attention">Attention</span> &rarr;
+              <span class="doc-flow-step" data-target-tab="tab-logits">Logits &amp; Probabilities</span> &rarr;
+              <span class="doc-flow-step" data-target-tab="tab-generation">Response</span>
+            </div>
+          </section>
+
+          <section class="doc-section">
+            <h2 class="doc-section-heading">2. Model</h2>
+            <p class="doc-paragraph"><strong>Qwen/Qwen2.5-1.5B-Instruct</strong> (1.54B parameters, 28 layers, 1536 dim, Apache 2.0 license).</p>
+          </section>
+
+          <section class="doc-section">
+            <h2 class="doc-section-heading">3. Technology Stack</h2>
+            <p class="doc-paragraph">Python, PyTorch, Transformers, Streamlit, Plotly, Scikit-learn, NumPy.</p>
+          </section>
+        </article>
+
+        <!-- P1 - Sheet 2 -->
+        <article id="doc-sheet-2" class="doc-sheet" style="display:none;">
+          <h2 class="doc-section-heading">4. Implementation Steps (1 to 3)</h2>
+          <div class="doc-code-box">Step 1: Setup LLM-XRay/<br>Step 2: Load Qwen2.5-1.5B-Instruct<br>Step 3: Build Chat Interface</div>
+        </article>
+
+        <!-- P1 - Sheet 3 -->
+        <article id="doc-sheet-3" class="doc-sheet" style="display:none;">
+          <h2 class="doc-section-heading">Step 4 &amp; 5: Tokenization &amp; Embeddings</h2>
+          <div class="doc-code-box">Tokenization &rarr; Token IDs &rarr; 1536-dim Embeddings &rarr; 2D PCA Space</div>
+        </article>
+
+        <!-- P1 - Sheet 4 -->
+        <article id="doc-sheet-4" class="doc-sheet" style="display:none;">
+          <h2 class="doc-section-heading">Step 6 to 8: 28 Layers, Attention Heatmaps, Hidden States</h2>
+          <div class="doc-code-box">Layers 1-28 &rarr; Multi-Head Attention Heatmap &rarr; Hidden States PCA</div>
+        </article>
+
+        <!-- P1 - Sheet 5 -->
+        <article id="doc-sheet-5" class="doc-sheet" style="display:none;">
+          <h2 class="doc-section-heading">Step 9 &amp; 10: Logits &amp; Token Generation</h2>
+          <div class="doc-code-box">Hidden State &rarr; LM Head &rarr; Logits &rarr; Softmax &rarr; Next Token Rollout</div>
+        </article>
+      </div>
+
+    </div>
+  </main>
+
+
+  <!-- ========================================================================= -->
+  <!-- MODAL 1: DOCUMENT INGESTION FOR AGENTIC RAG                               -->
+  <!-- ========================================================================= -->
+  <div id="doc-modal" class="doc-modal-overlay">
+    <div class="doc-modal-card">
+      <div class="doc-modal-header">
+        <div class="doc-modal-title">
+          <span>📚</span>
+          <span>Agentic RAG Knowledge Base</span>
+        </div>
+        <button id="btn-close-doc-modal" style="background:transparent; border:none; color:#9ca3af; font-size:18px; cursor:pointer;">✕</button>
+      </div>
+
+      <p style="font-size:13px; color:#9ca3af;">
+        Upload files (PDF, DOCX, TXT, CSV, JSON, MD). The local RAG engine will chunk the text, compute vector representations, and perform cosine similarity matching for question answering.
+      </p>
+
+      <div id="drop-zone" class="drop-zone">
+        <span style="font-size:32px;">📁</span>
+        <div style="font-weight:600; font-size:14px;">Drop files here, or click to browse</div>
+        <span style="font-size:11.5px; color:#9ca3af;">Supported: .pdf, .docx, .txt, .csv, .json, .md</span>
+        <input type="file" id="file-upload-input" multiple style="display:none;" accept=".txt,.csv,.json,.md,.pdf,.docx">
+      </div>
+
+      <div>
+        <div style="font-size:12.5px; font-weight:700; color:#d1d5db; margin-bottom:8px;">Currently Indexed Documents:</div>
+        <div id="doc-items-preview" class="doc-list-preview"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========================================================================= -->
+  <!-- MODAL 2: LOCALGPT SYSTEM & MODEL SETTINGS                                 -->
+  <!-- ========================================================================= -->
+  <div id="settings-modal" class="doc-modal-overlay">
+    <div class="settings-modal-card">
+      <div class="doc-modal-header">
+        <div class="doc-modal-title">
+          <span>⚙️</span>
+          <span>LocalGPT Settings &amp; Hyperparameters</span>
+        </div>
+        <button id="btn-close-settings-modal" style="background:transparent; border:none; color:#9ca3af; font-size:18px; cursor:pointer;">✕</button>
+      </div>
+
+      <!-- System Prompt Persona -->
+      <div class="settings-field-group">
+        <label class="settings-label" for="select-sys-prompt-preset">System Prompt Persona:</label>
+        <select id="select-sys-prompt-preset" class="settings-select">
+          <option value="default" selected>Default (Helpful, Concise, Direct)</option>
+          <option value="code">Code Specialist (Clean code, algorithms, complexity)</option>
+          <option value="academic">Academic Tutor (First principles &amp; definitions)</option>
+          <option value="concise">Minimalist (Extreme brevity &amp; bullet points)</option>
+          <option value="custom">Custom System Prompt</option>
+        </select>
+      </div>
+
+      <div class="settings-field-group" id="custom-sys-prompt-wrap" style="display:none;">
+        <label class="settings-label" for="textarea-custom-sys-prompt">Custom Instructions:</label>
+        <textarea id="textarea-custom-sys-prompt" class="settings-textarea" placeholder="Enter custom system instructions for Qwen 2.5..."></textarea>
+      </div>
+
+      <!-- Temperature -->
+      <div class="settings-field-group">
+        <div style="display:flex; justify-content:space-between;">
+          <label class="settings-label">Temperature: <span id="settings-val-temp" style="color:#10a37f;">0.75</span></label>
+        </div>
+        <input type="range" id="settings-slider-temp" class="xray-slider cyan-accent" min="0.0" max="2.0" step="0.05" value="0.75">
+      </div>
+
+      <!-- Context Memory Turns -->
+      <div class="settings-field-group">
+        <label class="settings-label" for="select-memory-turns">Conversation Context Memory Window:</label>
+        <select id="select-memory-turns" class="settings-select">
+          <option value="4">Last 4 Turns (Fastest)</option>
+          <option value="10" selected>Last 10 Turns (Balanced - Recommended)</option>
+          <option value="20">Last 20 Turns (Deep Context)</option>
+        </select>
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:8px;">
+        <button id="btn-save-settings" class="btn-launch-interactive" style="background:#10a37f; padding:6px 16px;">
+          Save Settings
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- JavaScript Engines -->
+  <script src="js/tokenizer.js"></script>
+  <script src="js/transformer_engine.js"></script>
+  <script src="js/memory.js"></script>
+  <script src="js/rag_agent.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
