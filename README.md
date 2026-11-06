@@ -1,6 +1,6 @@
 # 🤖 LocalGPT Pro & LLM X-Ray | Secure Multi-User AI Assistant
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-ship.place-success?style=for-the-badge&logo=cloudflare)](https://splashy-dimple-wbctd.ship.place/)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-ship.place-success?style=for-the-badge&logo=cloudflare)](https://fluffy-draw-f2y11.ship.place/)
 [![Phase 3](https://img.shields.io/badge/Phase_3-LocalGPT_Pro-orange?style=for-the-badge)](pages/workspace.py)
 [![Model](https://img.shields.io/badge/Model-Qwen_2.5--1.5B--Instruct-purple?style=for-the-badge)](https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct)
 [![Auth](https://img.shields.io/badge/Auth-Firebase_Identity-yellow?style=for-the-badge)](auth/auth.py)
@@ -17,7 +17,7 @@ The LLM stays local on your laptop (`Qwen/Qwen2.5-1.5B-Instruct`), and Firebase 
 
 ## 🌟 Deployments & Access
 
-- **🌐 Live Production Web URL**: [https://splashy-dimple-wbctd.ship.place/](https://splashy-dimple-wbctd.ship.place/)
+- **🌐 Live Production Web URL**: [https://fluffy-draw-f2y11.ship.place/](https://fluffy-draw-f2y11.ship.place/) *(Mirror: [splashy-dimple-wbctd.ship.place](https://splashy-dimple-wbctd.ship.place/))*
 - **💻 Local Web Demo**: `http://localhost:3000/` (via `server.ps1`)
 - **🚀 Local Streamlit Multi-User Pro App**: `http://localhost:8501/` (via `streamlit run app.py`)
 
