@@ -1,0 +1,185 @@
+/* Common Design System & Base Typography */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap');
+
+:root {
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-display: 'Outfit', var(--font-sans);
+
+  /* X-Ray Theme Colors (Photo 1 & 2) */
+  --xray-bg: #f4f6f9;
+  --xray-sidebar-bg: #eceff4;
+  --xray-card-bg: #ffffff;
+  --xray-text-primary: #1e293b;
+  --xray-text-secondary: #64748b;
+  --xray-text-muted: #94a3b8;
+  --xray-border: #e2e8f0;
+  --xray-accent-red: #ea4335;
+  --xray-accent-red-hover: #d33426;
+  --xray-banner-bg: #1e293b;
+  --xray-banner-text: #f8fafc;
+  --xray-tab-bg: #334155;
+  --xray-tab-active: #0ea5e9;
+
+  /* Token Pill Colors (Photo 2) */
+  --token-special-bg: #701a75;
+  --token-special-text: #fdf4ff;
+  --token-special-border: #a21caf;
+  --token-regular-bg: #0f766e;
+  --token-regular-text: #f0fdfa;
+  --token-regular-border: #14b8a6;
+  --token-hover: #0284c7;
+
+  /* ChatGPT Platform Dark Theme (Photo 3) */
+  --chat-bg: #171717;
+  --chat-sidebar-bg: #111111;
+  --chat-card-bg: #212121;
+  --chat-card-hover: #2f2f2f;
+  --chat-text-primary: #ececec;
+  --chat-text-secondary: #b4b4b4;
+  --chat-text-muted: #707070;
+  --chat-border: #2e2e2e;
+  --chat-input-bg: #212121;
+  --chat-input-border: #383838;
+  --chat-green: #10a37f;
+  --chat-green-hover: #1a7f64;
+  --chat-badge-bg: #052e16;
+  --chat-badge-text: #4ade80;
+
+  /* Transitions & Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--xray-bg);
+  color: var(--xray-text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  height: 100vh;
+}
+
+/* Master Navigation Bar */
+.master-header {
+  height: 48px;
+  background-color: #0f172a;
+  color: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  border-bottom: 1px solid #1e293b;
+  z-index: 1000;
+  position: sticky;
+  top: 0;
+}
+
+.master-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.master-badge {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.phase-switcher {
+  display: flex;
+  align-items: center;
+  background-color: #1e293b;
+  border-radius: 8px;
+  padding: 3px;
+  gap: 4px;
+}
+
+.phase-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background: transparent;
+  color: #94a3b8;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.phase-btn:hover {
+  color: #f8fafc;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.phase-btn.active {
+  background-color: #0ea5e9;
+  color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.master-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+}
+
+.course-tag {
+  color: #38bdf8;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.view-container {
+  display: none;
+  height: calc(100vh - 48px);
+  width: 100%;
+}
+
+.view-container.active-view {
+  display: flex;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.7);
+}
